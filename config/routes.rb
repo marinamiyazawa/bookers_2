@@ -5,10 +5,10 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show,:index,:edit,:update]
   resources :books do
-  	resource :book_comments, only: [:create]
+  	resource :book_comments, only: [:create,:destroy]
    resource :favorites, only: [:create, :destroy]
   end
 
-  delete 'books/:book_id/book_comment/:id', to:'book_comments#destroy', as: 'book_comments'
+ 
   
 end
