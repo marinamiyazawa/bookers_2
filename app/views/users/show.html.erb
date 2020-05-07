@@ -5,6 +5,8 @@
 <div class="profile-container">
 <h2>User info</h2>
 <%= render 'users/profile', user: @user %>
+<%= render 'relationships/follow_button', user: @user %>
+
 <!--同コントローラーのviewで表示ならusersは省略可 -->
 </div>
 

@@ -5,7 +5,9 @@ class UsersController < ApplicationController
   def show
   	@user = User.find(params[:id])
   	@books = @user.books
-  	@book = Book.new #new bookの新規投稿で必要（保存処理はbookコントローラー側で実施）
+  	@book = Book.new 
+    
+    #new bookの新規投稿で必要（保存処理はbookコントローラー側で実施）
   end
 
   def index
@@ -25,6 +27,18 @@ class UsersController < ApplicationController
   		render "edit"
   	end
   end
+
+  def following
+    @user = User.find(params[:id])
+    @users = @user.followings
+    render 'show_follow'
+  end
+
+  def followers
+    @user = User.find(params[:id])
+    @users = @user.followers
+    render 'show_follower'
+  end
 end
 
   private
@@ -33,9 +47,9 @@ end
   end
 
   #url直接防止　メソッドを自己定義してbefore_actionで発動。
-   def correct_user
+  def correct_user
   @user = User.find(params[:id])
-  if @user != current_user
+    if @user != current_user
     redirect_to user_path(current_user)
+    end
   end
-end
