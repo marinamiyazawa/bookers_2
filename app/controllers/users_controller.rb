@@ -11,8 +11,11 @@ class UsersController < ApplicationController
   end
 
   def index
-  	@users = User.all #一覧表示するためにUserモデルのデータを全て変数に入れて取り出す。
-  	@book = Book.new #new bookの新規投稿で必要（保存処理はbookコントローラー側で実施）
+  	@users = User.all
+    if params[:name].present?
+      @users = @users.get_by_name params[:name]
+    end
+  	@book = Book.new
   end
 
   def edit
@@ -39,6 +42,18 @@ class UsersController < ApplicationController
     @users = @user.followers
     render 'show_follower'
   end
+
+  def search
+    @user_or_book = params[:option]
+    @how_search = params[:choice]
+    
+    if @user_or_book =="1"
+      @users = User.search(params[:search], @user_or_book)
+    else
+      @books = Book.search(params[:search], @user_or_book)
+    end
+  end
+
 end
 
   private
