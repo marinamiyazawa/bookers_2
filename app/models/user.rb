@@ -31,7 +31,6 @@ class User < ApplicationRecord
   end
 
   def User.search(search, user_or_book, how_search)
-    if user_or_book == "1"
       if how_search == "1"
         User.where(['name LIKE ?',"%#{search}%"])
       elsif how_search == "2"
@@ -43,7 +42,7 @@ class User < ApplicationRecord
       else
       User.all
       end
-    end
+    
   end
 
 
