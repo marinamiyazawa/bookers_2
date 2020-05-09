@@ -38,6 +38,7 @@
       </div>
     </header>
     
+    <% if user_signed_in? %>
     <div style="margin-top: 70px; text-align: center;">
      <%= form_tag(search_path, :method => 'get') do %>
      <%= text_field_tag :search %>
@@ -46,6 +47,7 @@
      <%= submit_tag 'Search' %>
     <% end %>
     </div>
+    <% end %>
     <%= yield %>
     
      

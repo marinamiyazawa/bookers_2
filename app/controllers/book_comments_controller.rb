@@ -1,10 +1,10 @@
 class BookCommentsController < ApplicationController
 	def create
 		@book1 = Book.find(params[:book_id])
-		@book_comment = current_user.book_comments.new(book_comment_params)
+		@book_comment = current_user.book_comments.build(book_comment_params)
 		@book_comment.book_id = @book1.id
 		if @book_comment.save
-			 redirect_to books_path(@book1)
+			 render :index
 		 else
 		 	@user = @book1.user
 		render "/books/show"
@@ -17,7 +17,7 @@ class BookCommentsController < ApplicationController
       redirect_to request.referer
     end
 		@book_comment.destroy
-		redirect_to request.referer
+		render :index
 	end
 
 	private

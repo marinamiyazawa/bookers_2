@@ -1,0 +1,41 @@
+<td>
+	<i class="fa fa-comment"></i>
+	<a href="#comments"><%= book1.book_comments.count %></a>
+</td>
+						
+<div class="comment-list bt style-2" id="comments">
+	<div class="float-wrapper">
+		<h2 class="comment-count"><%= book1.book_comments.count %>件コメント</h2>
+	</div>
+</div>
+
+
+					
+
+<% book1.book_comments.each do |book_comment| %>
+	<p class="comment">
+		<div class="comment-body bb">
+			<div class="comment-avatar">
+				<div class="avatar">
+
+					<%= attachment_image_tag book_comment.user, :profile_image, size:'60x60', fallback: "no_image.jpg" %>
+				</div>
+			</div>
+			<div class="comment-text">
+				<div class="comment-author clearfix">
+					<%=link_to book_comment.user.name,  user_path(book_comment.user) %></a>
+					<span class="comment-meta">
+						<span class="comment-date"><%= book_comment.created_at.strftime('%Y/%m/%d') %>
+						</span>
+					</span>
+				</div>
+	        		<div class="comment-entry"><%= book_comment.comment %></div>
+	        </div>
+		</div>
+	</p>
+
+	<% if book_comment.user == current_user %>
+		<td><%= link_to "Destroy", book_book_comments_path(book_comment.id), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn-sm btn-danger" %>
+		</td>
+	<% end %>
+<% end %>
