@@ -15,36 +15,33 @@
 			<h2>Book detail</h2>
 
 			<table class="table">
-				<tr>
-					<td>
-						<%= link_to (@book1.user) do %>
-							<%= attachment_image_tag(@book1.user, :profile_image, :fill, 100, 100, fallback: "no-image-mini.jpg") %><br>
-							<%= @book1.user.name %>
-						<% end %>
-					</td>
-					<td><%= link_to @book1.title, @book %></td>
-					<td><%= @book1.body %></td>
-
-	              <div id="favorites_buttons_<%= @book1.id %>">
-	                    <%= render 'favorites/favorite', book: @book1 %>
-	                </div>
+				<tr class="book_<%= @book.id %>">
+				
+				<%= render 'books/book', book: @book %>
 
 
 					<td>
-					<% if @book1.user ==current_user %>
-						<td><%= link_to "Edit",edit_book_path(@book1), class: "btn-sm btn-success edit_book_#{@book1.id}" %></td>
-						<td><%= link_to "Destroy",@book1, method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn-sm btn-danger destroy_book_#{@book1.id}" %></td>
+					<% if @book.user ==current_user %>
+						<td><%= link_to "Edit",edit_book_path(@book), class: "btn-sm btn-success edit_book_#{@book.id}" %></td>
+						<td><%= link_to "Destroy",@book, method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn-sm btn-danger destroy_book_#{@book.id}" %></td>
 					<% end %>
 				    </td>
 				</tr>
 			</table>
-
-
-					<%= render partial: 'book_comments/index', locals: { book1: @book1 } %>
-	
-                    <%= render partial: 'book_comments/form', locals: {book1: @book1, book_comment: @book_comment} %>
+            
+　　　　　　　
+            <div id="comments_area">
+                <table class="table">
+                	<tr>
+				<%= render partial: 'book_comments/index', locals: { book: @book, comments: @comments } %>
 			
-
+		            </tr>
+			</div>	
+                   <tr>
+                    <%= render partial: 'book_comments/form', locals: {book: @book, book_comment: @book_comment, comments: @comments} %>
+			
+                    </tr>
+                </table>
 		</div>
 	</div>
 </div>

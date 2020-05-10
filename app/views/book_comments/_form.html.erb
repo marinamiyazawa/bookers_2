@@ -1,4 +1,5 @@
-<%= form_for [book1, book_comment], remote: true do |f| %>
+<td>
+	<%= form_for [book, book_comment], remote: true do |f| %>
 	<%= render 'layouts/error_messages', model: f.object %>
 		<div class="row">
 			<div class="col-sm-12">
@@ -7,3 +8,4 @@
 		</div>
 	<%= f.submit "Post Comment", class: "btn btn-lg btn-primary mt-20 pull-right" %>
 <% end %>
+</td>

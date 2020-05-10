@@ -14,10 +14,11 @@ class BookCommentsController < ApplicationController
 	def destroy
 		@book_comment = BookComment.find(params[:book_id])
 		if @book_comment.user != current_user
-      redirect_to request.referer
-    end
-		@book_comment.destroy
-		render :index
+         
+        else
+		   @book_comment.destroy
+		   render :index
+		end
 	end
 
 	private

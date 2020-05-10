@@ -2,10 +2,11 @@ class BooksController < ApplicationController
   before_action :authenticate_user!
   before_action :correct_user, only:[:edit]  
   def show
-  	@book1 = Book.find(params[:id])
-    @book = Book.new 
-    @user = @book1.user
+  	@book = Book.find(params[:id])
+    @book_new = Book.new 
+    @user = @book.user
     @book_comment = BookComment.new
+    @comments = @book.book_comments.order(created_at: :desc)
   end
 
   def index
